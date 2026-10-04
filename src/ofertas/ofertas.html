@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ofertas · RoLivre</title>
+  <link rel="stylesheet" href="ofertas.css" />
+</head>
+<body>
+  <main class="pagina">
+    <header class="topo">
+      <div>
+        <h1>Ofertas</h1>
+        <p class="sub">Quem está pedindo seus itens agora. A mais recente vem primeiro.</p>
+      </div>
+      <button id="atualizar" class="atualizar" type="button" aria-label="Buscar ofertas de novo">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 11a8 8 0 1 0-2.3 5.7" /><path d="M20 4v7h-7" />
+        </svg>
+        <span id="quando">…</span>
+      </button>
+    </header>
+
+    <section id="lista" aria-live="polite"></section>
+
+    <details class="ajustes">
+      <summary>Ajustes</summary>
+      <div class="ajustes-corpo">
+        <label class="opcao"><input type="checkbox" id="f-perco" /> Mostrar ofertas em que eu perco</label>
+        <label class="opcao"><input type="checkbox" id="f-parcial" /> Mostrar anúncios que pedem itens que eu não tenho</label>
+        <label class="opcao">
+          <input type="checkbox" id="f-avisar" /> Me avisar quando alguém oferecer
+          <input type="number" id="f-pct" min="0" max="200" step="1" aria-label="Ganho mínimo em %" /> % ou mais
+        </label>
+      </div>
+    </details>
+  </main>
+
+  <div id="aviso" class="aviso" role="status" hidden></div>
+  <script src="ofertas.js"></script>
+</body>
+</html>

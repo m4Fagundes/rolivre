@@ -1,0 +1,57 @@
+:root { color-scheme: dark; }
+body {
+  margin: 0; width: 320px; max-height: 560px; overflow-y: auto;
+  background: #14161a; color: #e6e8ec;
+  font: 13px/1.45 -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px; border-bottom: 1px solid #23262d;
+  position: sticky; top: 0; background: #14161a; z-index: 2;
+}
+h1 { margin: 0; font-size: 15px; color: #4fa3ff; letter-spacing: .3px; }
+header button {
+  padding: 3px 9px; border-radius: 6px; cursor: pointer; font-size: 11px;
+  background: transparent; color: #8b91a0; border: 1px solid #3a3f4a;
+}
+header button:hover { color: #e6e8ec; }
+.acoes { display: flex; gap: 6px; }
+
+section { padding: 10px 14px; border-bottom: 1px solid #1d2026; }
+section:last-of-type { border-bottom: 0; }
+h2 {
+  display: flex; align-items: center; justify-content: space-between;
+  margin: 0 0 8px; font-size: 10px; letter-spacing: .7px;
+  text-transform: uppercase; color: #8b91a0;
+}
+
+.lista { display: flex; flex-direction: column; gap: 6px; }
+.vazio { color: #6b7280; font-size: 12px; }
+
+.item { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+.item:hover .nome { color: #4fa3ff; }
+.item img { width: 32px; height: 32px; border-radius: 6px; background: #22262e; flex: none; }
+.nome { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dir { color: #8b91a0; font-size: 11px; font-variant-numeric: tabular-nums; flex: none; }
+.novo { color: #7fd18a; font-weight: 700; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  padding: 4px 11px; border-radius: 999px; cursor: pointer; font-size: 12px;
+  background: transparent; color: #b9bfcc; border: 1px solid #3a3f4a;
+}
+.chip-on { background: #4fa3ff; color: #0b0d11; border-color: transparent; }
+
+/* switch */
+.sw { position: relative; display: inline-block; width: 30px; height: 17px; }
+.sw input { opacity: 0; width: 0; height: 0; }
+.sw span {
+  position: absolute; inset: 0; cursor: pointer; border-radius: 999px;
+  background: #3a3f4a; transition: .15s;
+}
+.sw span::before {
+  content: ""; position: absolute; width: 13px; height: 13px; left: 2px; top: 2px;
+  border-radius: 50%; background: #e6e8ec; transition: .15s;
+}
+.sw input:checked + span { background: #4fa3ff; }
+.sw input:checked + span::before { transform: translateX(13px); }

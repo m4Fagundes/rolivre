@@ -1,0 +1,30 @@
+<!doctype html>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="popup.css" />
+<header>
+  <h1>RoLivre</h1>
+  <div class="acoes">
+    <button id="checar" title="checar lancamentos agora">atualizar</button>
+    <button id="config" title="Configurações">configurações</button>
+  </div>
+</header>
+
+<section>
+  <h2>
+    Lancamentos oficiais
+    <label class="sw"><input type="checkbox" id="dropsOn" /><span></span></label>
+  </h2>
+  <div id="drops" class="lista">—</div>
+</section>
+
+<section>
+  <h2>Mais jogados</h2>
+  <div id="playtime" class="lista">—</div>
+</section>
+
+<section>
+  <h2>Favoritos</h2>
+  <div id="favs" class="lista">—</div>
+</section>
+
+<script src="popup.js"></script>

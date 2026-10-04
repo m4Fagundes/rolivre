@@ -1,0 +1,550 @@
+/* O que a extensao injeta e ou clone de elemento nativo (sem estilo proprio)
+   ou uma destas quatro pecas. Tudo transparente/currentColor pra funcionar
+   igual no tema claro e no escuro da Roblox. */
+
+.rl-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 5;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(10, 12, 16, 0.82);
+  color: #7fd18a;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+}
+.rl-badge-alerta { color: #ff8d8d; }
+
+/* O container do card precisa ser o referencial do badge. */
+.item-card-thumb-container { position: relative; }
+
+.rl-native-btn {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+  opacity: 0.75;
+}
+.rl-native-btn:hover { opacity: 1; }
+.rl-native-btn:disabled { opacity: 0.4; cursor: default; }
+
+.rl-chip-inline {
+  margin-left: 8px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+  opacity: 0.65;
+}
+.rl-chip-inline:hover { opacity: 1; }
+.rl-chip-ok { opacity: 1; cursor: default; border-color: transparent; background: rgba(127, 209, 138, 0.14); color: #7fd18a; }
+
+/* Icone na barra do topo. O <li> e clone da classe do da engrenagem, entao
+   espacamento e alinhamento vem da Roblox; aqui so o botao e o menu. */
+#rl-nav { position: relative; }
+.rl-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.92;
+}
+.rl-nav-btn:hover,
+.rl-nav-btn[aria-expanded="true"] { opacity: 1; background: rgba(255, 255, 255, 0.1); }
+
+.rl-nav-pop {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 1060;
+  min-width: 230px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #0b0c0e;
+  color: #f2f4f5;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.rl-nav-pop[hidden] { display: none; }
+.rl-nav-titulo { font-size: 18px; font-weight: 700; }
+.rl-nav-sub { margin-top: 4px; color: #a9b0b8; }
+.rl-nav-acao {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border: 1px solid #3a3f4a;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.rl-nav-acao:hover { background: #1c1f24; }
+
+.rl-inj-alerta .row-content { color: #d93838; font-weight: 700; }
+
+/* Tema opcional, ligado no popup. De proposito e discreto: mexer demais no
+   CSS da Roblox quebra a cada deploy deles. */
+html.rl-tema body,
+html.rl-tema .content { background-color: var(--rl-bg) !important; }
+html.rl-tema .text-lead,
+html.rl-tema .font-header-2 { color: var(--rl-fg) !important; }
+
+/* --- Emblemas que voce tem --------------------------------------------------- */
+.rl-emb-total {
+  margin-left: 10px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(0, 176, 111, 0.14);
+  color: #00a35f;
+  font-size: 14px;
+  font-weight: 600;
+  vertical-align: middle;
+}
+.rl-emb-chip {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 9px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  vertical-align: middle;
+  opacity: 0.55;
+}
+.rl-emb-chip-ok { border-color: transparent; background: rgba(0, 176, 111, 0.14); color: #00a35f; opacity: 1; }
+.rl-emb-falta .badge-image img { filter: grayscale(1); opacity: 0.5; }
+.rl-emb-tem .badge-image { position: relative; }
+.rl-emb-tem .badge-image::after {
+  content: "✓";
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #00b06f;
+  color: #fff;
+  font: 700 13px/22px system-ui, sans-serif;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Jogar direto do card ----------------------------------------------------- */
+.rl-play-capa { position: relative; }
+.rl-play {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0 0 0 2px;
+  border: 0;
+  border-radius: 50%;
+  background: #00b06f;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.12s, transform 0.12s;
+}
+a.game-card-link:hover .rl-play,
+.rl-play:focus-visible { opacity: 1; transform: scale(1); }
+.rl-play:hover { background: #00c77d; }
+@media (hover: none) { .rl-play { opacity: 1; transform: none; } }
+
+/* --- Aviso de preco ------------------------------------------------------------- */
+.rl-linha-fav { display: flex; align-items: center; gap: 18px; }
+.rl-aviso {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.rl-aviso[aria-pressed="true"] { color: #00a35f; font-weight: 600; }
+.rl-aviso:disabled { opacity: 0.5; }
+
+/* --- Popover (amizades em comum) ----------------------------------------------- */
+.rl-pop {
+  position: absolute;
+  z-index: 1060;
+  width: 280px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #0b0c0e;
+  color: #f2f4f5;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+}
+.rl-pop-titulo { margin-bottom: 8px; font-weight: 700; }
+.rl-pessoas { display: flex; flex-direction: column; gap: 2px; max-height: 320px; overflow-y: auto; }
+.rl-pessoa {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px;
+  border-radius: 8px;
+  color: inherit !important;
+  text-decoration: none !important;
+}
+.rl-pessoa:hover { background: #1c1f24; }
+.rl-pessoa img,
+.rl-sem-rosto { width: 36px; height: 36px; border-radius: 50%; background: #22262e; flex: none; }
+.rl-pessoa span { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+.rl-pessoa small { color: #a9b0b8; }
+
+/* --- Esconder anuncios ---------------------------------------------------------- */
+html.rl-sem-anuncios li.list-item:has(.sponsored-ad-label),
+html.rl-sem-anuncios .game-card-container:has(.sponsored-ad-label),
+html.rl-sem-anuncios iframe[src*="userads"],
+html.rl-sem-anuncios .abp,
+html.rl-sem-anuncios [id$="-Abp"],
+html.rl-sem-anuncios [id*="-Abp-"] { display: none !important; }
+
+/* --- Calculadora de troca ------------------------------------------------------- */
+.rl-troca-resumo {
+  --rl-cor: #7a8290;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 20px 0 24px;
+  padding: 16px 20px;
+  border: 2px solid var(--rl-cor);
+  border-left-width: 6px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--rl-cor) 9%, transparent);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  font-size: 15px;
+  line-height: 1.45;
+}
+/* Veredito: a cor do quadro inteiro vem dele. */
+.rl-troca-resumo.rl-v-boa { --rl-cor: #00a35f; }
+.rl-troca-resumo.rl-v-justa { --rl-cor: #c98a00; }
+.rl-troca-resumo.rl-v-ruim { --rl-cor: #d93838; }
+.rl-v-topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.rl-v-selo { display: inline-flex; align-items: center; gap: 8px; color: var(--rl-cor); font-size: 16px; font-weight: 800; }
+.rl-v-selo::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--rl-cor); }
+.rl-v-numero { margin-top: 6px; color: var(--rl-cor); font-size: 44px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.rl-v-frase { margin-top: 6px; font-size: 15px; font-weight: 600; }
+.rl-v-motivo { margin-top: 10px; padding: 8px 12px; border-radius: 8px; background: color-mix(in srgb, var(--rl-cor) 14%, transparent); font-size: 14px; font-weight: 600; }
+.rl-v-detalhes { margin-top: 12px; font-size: 14px; }
+.rl-v-detalhes summary { cursor: pointer; width: fit-content; opacity: 0.7; font-weight: 600; list-style: none; }
+.rl-v-detalhes summary::-webkit-details-marker { display: none; }
+.rl-v-detalhes summary::after { content: " ▸"; } /* a Roblox apaga o marcador padrao */
+.rl-v-detalhes[open] summary::after { content: " ▾"; }
+.rl-v-detalhes summary:hover { opacity: 1; }
+.rl-v-detalhes[open] summary { margin-bottom: 8px; }
+.rl-troca-grade { display: grid; grid-template-columns: 1fr auto; gap: 4px 0; align-items: baseline; }
+.rl-troca-grade .v { padding-left: 16px; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+.rl-troca-nota { margin-top: 10px; font-size: 13px; opacity: 0.75; }
+.rl-troca-alerta { margin-top: 10px; padding: 8px 12px; border-radius: 8px; background: rgba(217, 56, 56, 0.12); color: #d93838; font-weight: 600; }
+
+/* --- Explorador de servidores ---------------------------------------------------- */
+.rl-exp {
+  margin: 12px 0 20px;
+  padding: 14px 16px;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  border-radius: 10px;
+  font-size: 14px;
+}
+.rl-exp-topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.rl-exp-topo h3 { margin: 0; font-size: 18px; font-weight: 700; }
+.rl-exp-acoes { display: flex; gap: 8px; align-items: center; }
+.rl-exp-select,
+.rl-exp-btn,
+.rl-exp-entrar,
+.rl-exp-chip {
+  padding: 5px 12px;
+  border: 1px solid rgba(127, 127, 127, 0.45);
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.rl-exp-btn { font-weight: 600; }
+.rl-exp-btn:disabled { opacity: 0.5; cursor: default; }
+.rl-exp-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 8px; }
+.rl-exp-chips:empty { display: none; }
+.rl-exp-chip { border-radius: 999px; }
+.rl-exp-chip[aria-pressed="true"] { border-color: transparent; background: #335fff; color: #fff; }
+.rl-exp-lista { display: flex; flex-direction: column; max-height: 360px; overflow-y: auto; }
+.rl-exp-linha {
+  display: grid;
+  grid-template-columns: minmax(140px, 1.4fr) 70px 1fr 80px auto;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 2px;
+  border-top: 1px solid rgba(127, 127, 127, 0.18);
+  font-variant-numeric: tabular-nums;
+}
+.rl-exp-cidade { font-weight: 600; }
+.rl-exp-entrar { border-color: transparent; background: #00b06f; color: #fff; font-weight: 600; }
+.rl-exp-entrar:hover { background: #00c77d; }
+.rl-exp-status { display: block; margin-top: 8px; font-size: 12px; opacity: 0.7; }
+
+/* --- Card de info do item ---------------------------------------------------------- */
+.rl-ic {
+  position: absolute;
+  z-index: 1070;
+  width: 272px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #0b0c0e;
+  color: #f2f4f5;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  font-size: 13px;
+  line-height: 1.4;
+}
+.rl-ic-nome { font-size: 15px; font-weight: 700; }
+.rl-ic-sigla { margin-left: 6px; padding: 0 6px; border-radius: 4px; background: #22262e; color: #a9b0b8; font-size: 11px; }
+.rl-ic-avisos { display: flex; gap: 6px; margin-top: 6px; }
+.rl-ic-aviso { padding: 1px 7px; border-radius: 999px; font-size: 11px; font-weight: 700; background: #22262e; }
+.rl-ic-projected { background: rgba(217, 56, 56, 0.2); color: #ff8d8d; }
+.rl-ic-hyped { background: rgba(245, 165, 36, 0.2); color: #f5c060; }
+.rl-ic-raro { background: rgba(127, 209, 138, 0.18); color: #7fd18a; }
+.rl-ic-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; margin: 10px 0; }
+.rl-ic-grade small { display: block; color: #a9b0b8; font-size: 11px; }
+.rl-ic-grade strong { font-size: 14px; font-variant-numeric: tabular-nums; }
+.rl-ic-sub { color: #a9b0b8; font-size: 11px; }
+.rl-ic-graf-box { color: #7fd18a; }
+.rl-ic-graf { display: block; width: 100%; height: 56px; margin-top: 4px; }
+.rl-ic-eixo { display: flex; justify-content: space-between; color: #a9b0b8; font-size: 11px; }
+.rl-ic-vazio { padding: 16px 0; color: #a9b0b8; font-size: 12px; text-align: center; }
+.rl-ic-link { display: inline-block; margin-top: 8px; color: #6ea8ff !important; font-weight: 600; }
+
+/* --- Busca de limitados (menu do icone) -------------------------------------------- */
+.rl-busca { margin-top: 12px; text-align: left; }
+.rl-busca-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #3a3f4a;
+  border-radius: 8px;
+  background: #16181c;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+}
+.rl-busca-lista { display: flex; flex-direction: column; margin-top: 6px; max-height: 320px; overflow-y: auto; }
+.rl-busca-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 6px;
+  border-radius: 8px;
+  color: inherit !important;
+  text-decoration: none !important;
+}
+.rl-busca-item:hover { background: #1c1f24; }
+.rl-busca-item img { width: 32px; height: 32px; border-radius: 6px; background: #22262e; flex: none; }
+.rl-busca-nome { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rl-busca-nome small { margin-left: 6px; color: #a9b0b8; }
+.rl-busca-valor { color: #7fd18a; font-weight: 700; font-variant-numeric: tabular-nums; }
+.rl-busca-vazio { padding: 10px 4px; color: #a9b0b8; }
+.rl-nav-pop:has(.rl-busca) { min-width: 320px; }
+
+/* Demanda do Rolimon's: selo no canto do item da troca e chip no resumo. */
+.rl-dem {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #6b7280;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.item-card-thumb-container > .rl-dem { position: absolute; right: 6px; bottom: 6px; z-index: 5; pointer-events: none; }
+.rl-dem-0 { background: #d93838; }
+.rl-dem-1 { background: #e07b17; }
+.rl-dem-2 { background: #6b7280; }
+.rl-dem-3 { background: #00a35f; }
+.rl-dem-4 { background: #8b5cf6; }
+.rl-dem-sem { background: transparent; color: inherit; opacity: 0.6; border: 1px solid currentColor; }
+.rl-troca-demanda { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 12px; margin-top: 10px; font-weight: 600; }
+
+/* Saldo na lista de trocas: selo ao lado do nome de cada linha. */
+.rl-saldo-lista {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: rgba(127, 127, 127, 0.2);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.6;
+  vertical-align: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.rl-saldo-ganha { background: #00a35f; color: #fff; }
+.rl-saldo-perde { background: #d93838; color: #fff; }
+.rl-troca-aviso { margin-top: 10px; padding: 8px 12px; border-radius: 8px; background: rgba(224, 123, 23, 0.14); color: #c46a10; font-weight: 600; }
+
+/* Indicador de RAP no item sem Value: pra onde o RAP vai com a proxima venda. */
+.rl-rap {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  z-index: 5;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #6b7280;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.rl-rap-sobe { background: #00a35f; }
+.rl-rap-cai { background: #d93838; }
+.rl-rap-sem { background: rgba(107, 114, 128, 0.6); }
+
+/* Icone de Value do Rolimon's: raio azul (desenho proprio, no espirito do RoPro). */
+.rl-ico-valor {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  vertical-align: -2px;
+  background: no-repeat center / contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M9.6 1 3.2 9h4.1l-1 6 6.5-8.4H8.6z' fill='%232d8cff' stroke='%231a6fe0' stroke-width='.6' stroke-linejoin='round'/></svg>");
+}
+.rl-valor-item { margin-top: 2px !important; color: #2d8cff; }
+.rl-valor-item.rl-valor-sem { opacity: 0.55; }
+.rl-valor-num { font-variant-numeric: tabular-nums; }
+
+/* Modo print: numero de serie borrado. */
+/* A Roblox parte o serial em dois spans ("#" + "743") dentro de
+   .limited-number-container: esconde a caixa inteira. .rl-serial e o reserva
+   achado pelo texto (outros formatos). */
+html.rl-sem-serial .limited-number-container,
+html.rl-sem-serial .limited-number,
+html.rl-sem-serial .rl-serial { filter: blur(6px); user-select: none; }
+.rl-troca-resumo { min-width: 0; overflow-wrap: anywhere; }
+.rl-print {
+  min-width: 30px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.rl-print[aria-pressed="true"] { background: #1f2328; color: #fff; border-color: #1f2328; text-decoration: line-through; }
+
+/* --- Mercado: analise do item na pagina do item ------------------------------ */
+.rl-mercado {
+  --rl-m-tinta: #1f2328;
+  --rl-m-suave: #5b6270;
+  --rl-m-linha: rgba(127, 127, 127, 0.22);
+  --rl-m-fundo: #ffffff;
+  margin: 20px 0 24px;
+  padding: 20px 22px;
+  border: 1px solid var(--rl-m-linha);
+  border-radius: 16px;
+  color: var(--rl-m-tinta);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.rl-mercado.rl-m-escuro { --rl-m-tinta: #f2f4f5; --rl-m-suave: #a3aab5; --rl-m-fundo: #191b1f; }
+.rl-m-topo { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.rl-m-topo h2 { margin: 0; font-size: 20px; font-weight: 800; color: var(--rl-m-tinta); }
+.rl-m-topo a { color: var(--rl-m-suave); font-size: 13px; text-decoration: none; }
+.rl-m-topo a:hover { text-decoration: underline; }
+
+.rl-m-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 18px; }
+.rl-m-tile { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.rl-m-rot { color: var(--rl-m-suave); font-size: 13px; }
+.rl-m-tile strong { font-size: 26px; font-weight: 700; line-height: 1.15; color: var(--rl-m-tinta); }
+.rl-m-delta { color: var(--rl-m-suave); font-size: 12px; font-weight: 600; }
+.rl-m-bom { color: #0ca30c; }
+.rl-m-ruim { color: #d03b3b; }
+
+.rl-m-graficos { position: relative; outline: none; }
+.rl-m-graficos:focus-visible { box-shadow: 0 0 0 2px #3987e5; border-radius: 8px; }
+.rl-m-gtit { display: block; margin: 4px 0 2px; color: var(--rl-m-suave); font-size: 12px; font-weight: 600; }
+.rl-m-svg { display: block; overflow: visible; }
+.rl-m-grade { stroke: var(--rl-m-linha); stroke-width: 1; }
+.rl-m-eixo { fill: var(--rl-m-suave); font-size: 11px; font-variant-numeric: tabular-nums; }
+.rl-m-anel { stroke: var(--rl-m-fundo); stroke-width: 2; }
+.rl-m-guia { stroke: var(--rl-m-suave); stroke-width: 1; }
+.rl-m-dica {
+  position: absolute;
+  top: 24px;
+  z-index: 3;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--rl-m-fundo);
+  border: 1px solid var(--rl-m-linha);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+  color: var(--rl-m-suave);
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.rl-m-dica strong { color: var(--rl-m-tinta); font-size: 14px; }
+.rl-m-dica[hidden] { display: none; }
+.rl-m-vazio { margin: 0; color: var(--rl-m-suave); }
+
+.rl-m-mais { margin-top: 14px; }
+.rl-m-mais summary, .rl-m-tab summary { cursor: pointer; width: fit-content; color: var(--rl-m-suave); font-weight: 600; list-style: none; }
+.rl-m-mais summary::-webkit-details-marker, .rl-m-tab summary::-webkit-details-marker { display: none; }
+.rl-m-mais summary::after, .rl-m-tab summary::after { content: " ▸"; }
+.rl-m-mais[open] > summary::after, .rl-m-tab[open] > summary::after { content: " ▾"; }
+.rl-m-mais dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; margin: 12px 0 0; }
+.rl-m-mais dt { color: var(--rl-m-suave); }
+.rl-m-mais dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--rl-m-tinta); }
+.rl-m-tab { margin-top: 12px; }
+.rl-m-tabela { margin-top: 8px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.rl-m-tabela th, .rl-m-tabela td { padding: 3px 14px 3px 0; text-align: right; color: var(--rl-m-tinta); }
+.rl-m-tabela th:first-child, .rl-m-tabela td:first-child { text-align: left; }
+.rl-m-tabela th { color: var(--rl-m-suave); font-weight: 600; }
+.rl-mercado-carregando { height: 120px; margin: 20px 0; border-radius: 16px; background: rgba(127, 127, 127, 0.08); }
+
+@media (max-width: 700px) {
+  .rl-m-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.rl-m-fonte { color: var(--rl-m-suave); font-size: 13px; }
+.rl-m-mais dd a { color: inherit; }

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RoLivre · Configurações</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="lado">
+      <div class="marca">
+        <svg viewBox="0 0 28 28" width="30" height="30" fill="none" stroke="currentColor"
+             stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="14" cy="14" r="11"/>
+          <path d="M10.5 19.5v-11h4.25a3.25 3.25 0 0 1 0 6.5H10.5M14.5 15l3.5 4.5"/>
+        </svg>
+        <div>
+          <div class="nome-app">RoLivre</div>
+          <div class="versao" id="versao"></div>
+        </div>
+      </div>
+      <nav id="nav" aria-label="Seções"></nav>
+    </aside>
+
+    <main>
+      <header class="topo">
+        <div>
+          <h1>Configurações</h1>
+          <p id="resumo" class="resumo"></p>
+        </div>
+        <input type="search" id="busca" placeholder="Buscar recurso" aria-label="Buscar recurso" />
+      </header>
+
+      <div id="grupos"></div>
+
+      <section class="grupo" id="sec-envio">
+        <h2>Enviar troca</h2>
+        <div class="card" id="envio"><div class="linha"><div class="desc">Carregando...</div></div></div>
+      </section>
+
+      <section class="grupo" id="sec-anuncio">
+        <h2>Anúncio no Rolimon's</h2>
+        <div class="card" id="anuncio"><div class="linha"><div class="desc">Carregando...</div></div></div>
+      </section>
+
+      <section class="grupo" id="sec-desejos">
+        <h2>Avisos de preço</h2>
+        <div class="card" id="desejos"></div>
+      </section>
+
+      <section class="grupo" id="sec-aparencia">
+        <h2>Aparência</h2>
+        <div class="card">
+          <div class="linha">
+            <div class="txt">
+              <div class="nome">Tema do site</div>
+              <div class="desc">Troca o fundo da Roblox. É de propósito discreto: mexer demais no CSS deles quebra a cada atualização.</div>
+            </div>
+          </div>
+          <div id="temas" class="temas" role="radiogroup" aria-label="Tema do site"></div>
+        </div>
+      </section>
+
+      <section class="grupo" id="sec-dados">
+        <h2>Dados</h2>
+        <div class="card">
+          <div class="linha">
+            <div class="txt">
+              <div class="nome">Limpar cache</div>
+              <div class="desc">Apaga valores do Rolimon's, inventários e regiões guardados. Use se um número parecer velho.</div>
+            </div>
+            <button class="btn" id="limpar">Limpar</button>
+          </div>
+          <div class="linha">
+            <div class="txt">
+              <div class="nome">Zerar tempo de jogo</div>
+              <div class="desc">Apaga as horas contadas em todos os jogos. Não tem volta.</div>
+            </div>
+            <button class="btn btn-perigo" id="zerar">Zerar</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="aviso" class="aviso" role="status" hidden>
+    <span id="aviso-txt"></span>
+    <button class="btn btn-claro" id="recarregar" hidden>Recarregar abas da Roblox</button>
+  </div>
+
+  <script src="../lib/catalogo.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

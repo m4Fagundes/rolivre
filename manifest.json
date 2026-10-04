@@ -1,0 +1,79 @@
+{
+  "manifest_version": 3,
+  "name": "RoLivre",
+  "version": "0.17.1",
+  "description": "Melhorias no site da Roblox: valor de limitados inline, regiao dos servidores, tempo de jogo e aviso de lancamento de item.",
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications",
+    "declarativeNetRequestWithHostAccess",
+    "cookies",
+    "offscreen"
+  ],
+  "host_permissions": [
+    "https://*.roblox.com/*",
+    "https://*.rolimons.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.roblox.com/*"
+      ],
+      "js": [
+        "src/lib/catalogo.js",
+        "src/content/core.js",
+        "src/content/features/values.js",
+        "src/content/features/servers.js",
+        "src/content/features/playtime.js",
+        "src/content/features/profile.js",
+        "src/content/features/navbar.js",
+        "src/content/features/emblemas.js",
+        "src/content/features/aprovacao.js",
+        "src/content/features/amigos.js",
+        "src/content/features/jogar-card.js",
+        "src/content/features/aviso-preco.js",
+        "src/content/features/anuncios.js",
+        "src/content/features/troca.js",
+        "src/content/features/explorador.js",
+        "src/content/features/card-item.js",
+        "src/content/features/saldo-lista.js",
+        "src/content/features/botao-ofertas.js",
+        "src/content/features/print.js",
+        "src/content/features/analise.js",
+        "src/content/boot.js"
+      ],
+      "css": [
+        "src/content/ui.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.roblox.com/*"
+      ],
+      "js": [
+        "src/content/page-bridge.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "RoLivre"
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  }
+}
